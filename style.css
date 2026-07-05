@@ -2,7 +2,7 @@
 body { font-family: 'Inter', -apple-system, sans-serif; }
 
 .ruleta-overlay {
-  /* Blindaje contra el tema de Jumpseller */
+  /* Blindaje contra el tema de Jumpseller perfecto */
   position: fixed !important; 
   top: 0 !important; 
   left: 0 !important; 
