@@ -182,7 +182,36 @@ document.addEventListener("DOMContentLoaded", function() {
       mensajePremio.classList.remove("mensaje-oculto");
       mensajePremio.classList.add("mensaje-visible");
       
-      // localStorage.setItem(claveStorage, "true"); // Descomentar en producción
+      // Activar el bloqueo en producción para evitar que tiren más de una vez
+      // localStorage.setItem(claveStorage, "true"); 
+
+      // --- ENVÍO DE DATOS A GOOGLE SHEETS ---
+      // REEMPLAZA ESTA URL POR LA QUE TE DIO GOOGLE APPS SCRIPT
+      const webhookURL = "https://script.google.com/macros/s/AKfycbx_Juhv1TXGKdVS-1gfbXC_U-my6txghftrND3CA4Dhehlc4NpkX0gjAxuJR9c8TXxl1A/exec";
+
+      const paqueteDatos = {
+        rut: rut,
+        celular: celular,
+        correo: correo,
+        premio_texto: textoCompleto,
+        premio_codigo: premioGanado.valor,
+        fecha: new Date().toLocaleString("es-CL") // Guarda la hora local de Chile
+      };
+
+      // Usamos Content-Type text/plain para evitar bloqueos de seguridad (CORS) del navegador
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain" 
+        },
+        body: JSON.stringify(paqueteDatos)
+      })
+      .then(respuesta => {
+        console.log("¡Lead guardado en la planilla exitosamente!");
+      })
+      .catch(error => {
+        console.error("Error de conexión:", error);
+      });
 
     }, 6000); 
   });
