@@ -21,6 +21,11 @@ body { font-family: 'Inter', -apple-system, sans-serif; }
   transition: 0.5s;
 }
 
+.ruleta-overlay.visible { 
+  opacity: 1 !important; 
+  visibility: visible !important; 
+}
+
 /* 1. CAJA AÚN MÁS ALTA (880px) PARA ACOMODAR LOS 3 INPUTS */
 .ruleta-caja-pro {
   background: radial-gradient(circle at top, #2a2a2a 0%, #111 100%);
