@@ -113,7 +113,42 @@ body { font-family: 'Inter', -apple-system, sans-serif; }
 #rueda-svg { width: 100%; height: 100%; transition: transform 6s cubic-bezier(0.1, 0.9, 0.15, 1); }
 
 @keyframes popIn { from { transform: scale(0.8) translateY(50px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+/* ======================================================= */
+/* AJUSTES PARA NOTEBOOKS (PANTALLAS BAJITAS)              */
+/* ======================================================= */
+@media (max-height: 900px) and (min-width: 769px) {
+  .ruleta-caja-pro { 
+    height: 90vh; /* Usa el 90% del alto de la pantalla, garantizando que la X siempre se vea */
+    min-height: 650px;
+  }
+  .ruleta-contenido { padding-top: 20px; }
+  .ruleta-texto h2 { font-size: 2.2rem; }
+  #bloque-formulario p { font-size: 1rem; margin: 5px 0 15px; }
+  
+  /* Compactamos un poco los inputs */
+  .input-grupo { gap: 8px; }
+  .input-grupo input, .input-grupo button { padding: 12px; }
+  
+  /* Achicamos la rueda en reposo para que no choque con los textos */
+  .rueda-contenedor { 
+    width: 700px; 
+    height: 700px; 
+    bottom: -480px; 
+  }
+  
+  /* Ajustamos el tamaño y la subida de la rueda al girar */
+  .rueda-contenedor.modo-giro { 
+    bottom: 20px; 
+    transform: translateX(-50%) scale(0.65); 
+  }
+}
 
+/* ======================================================= */
+/* AJUSTES PARA MÓVILES COMPLETAMENTE OPTIMIZADOS          */
+/* (Este es el bloque que ya tenías al final)              */
+/* ======================================================= */
+@media (max-width: 768px) {
+/* ... tu código móvil sigue intacto aquí abajo ... */
 /* AJUSTES PARA MÓVILES COMPLETAMENTE OPTIMIZADOS (VERSIÓN EQUILIBRADA) */
 @media (max-width: 768px) {
   .ruleta-caja-pro { height: 760px; } 
