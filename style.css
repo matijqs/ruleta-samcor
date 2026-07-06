@@ -116,54 +116,16 @@ body { font-family: 'Inter', -apple-system, sans-serif; }
 
 /* AJUSTES PARA MÓVILES COMPLETAMENTE OPTIMIZADOS (VERSIÓN EQUILIBRADA) */
 @media (max-width: 768px) {
-  .ruleta-caja-pro { 
-    height: 760px; /* Reducimos la altura total para que el pop-up sea más compacto */
-  } 
+  .ruleta-caja-pro { height: 760px; } 
+  .ruleta-contenido { padding: 30px 15px 0; }
+  .ruleta-texto h2 { font-size: 2rem; }
+  #bloque-formulario p { font-size: 0.95rem; margin: 8px 0 15px; }
   
-  .ruleta-contenido { 
-    padding: 30px 15px 0; 
-  }
+  .input-grupo { gap: 10px; }
+  .input-grupo input, .input-grupo button { max-width: 320px; padding: 12px 15px; font-size: 0.95rem; }
+  .terminos-texto { margin-top: 12px; color: #bbb; font-size: 0.75rem; line-height: 1.3; }
   
-  .ruleta-texto h2 { 
-    font-size: 2rem; 
-  }
-  
-  #bloque-formulario p { 
-    font-size: 0.95rem; 
-    margin: 8px 0 15px; 
-  }
-  
-  .input-grupo { 
-    gap: 10px; 
-  }
-  
-  .input-grupo input, .input-grupo button { 
-    max-width: 320px;
-    padding: 12px 15px; 
-    font-size: 0.95rem; 
-  }
-  
-  .terminos-texto { 
-    margin-top: 12px; 
-    color: #bbb;
-    font-size: 0.75rem; 
-    line-height: 1.3;
-  }
-  
-  /* AJUSTE CLAVE: Cerramos el espacio vacío acercando la rueda */
-  .rueda-contenedor { 
-    width: 750px; 
-    height: 750px; 
-    bottom: -450px; /* Traemos la rueda más arriba para eliminar el vacío */
-  } 
-  
-  /* Cuando gira, se posiciona de forma impecable en el centro del celular */
-  .rueda-contenedor.modo-giro { 
-    bottom: 30px; 
-    transform: translateX(-50%) scale(0.65); 
-  }
-  
-  .mensaje-contenedor { 
-    top: 210px; 
-  }
+  .rueda-contenedor { width: 750px; height: 750px; bottom: -450px; } 
+  .rueda-contenedor.modo-giro { bottom: 30px; transform: translateX(-50%) scale(0.65); }
+  .mensaje-contenedor { top: 210px; }
 }
