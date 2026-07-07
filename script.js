@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   const popup = document.getElementById("ruleta-popup");
+  document.body.appendChild(popup);
+
   const btnCerrar = document.getElementById("cerrar-ruleta");
   const btnGirar = document.getElementById("btn-girar");
   const contenedorSvg = document.getElementById("rueda-svg-container");
@@ -12,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const bloqueFormulario = document.getElementById("bloque-formulario");
   const ruedaContenedor = document.querySelector(".rueda-contenedor");
 
-  // --- NUEVO CATÁLOGO DE PREMIOS Y PROBABILIDADES ---
-  // El atributo "peso" define la probabilidad. La suma de todos los pesos es 50.
   const catalogoPremios = [
     { linea1: "5% Dcto", linea2: "Toda la tienda", color: "#FF1493", valor: "dcto_5", peso: 10 },
     { linea1: "Sigue", linea2: "Intentando", color: "#2a2a2a", valor: "perder", peso: 1 },
@@ -75,8 +75,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const radioInterior = 419;
     const numSegmentos = catalogoPremios.length;
     const anguloPorSegmento = 360 / numSegmentos;
-    
-    // El desfase asegura que matemáticamente el segmento 0 empiece perfectamente alineado al centro superior
     const desfase = -90 - (anguloPorSegmento / 2);
 
     catalogoPremios.forEach((premio, index) => {
@@ -95,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const medioAngulo = inicioAngulo + (anguloPorSegmento / 2);
       const medioRad = medioAngulo * Math.PI / 180;
       
-      // Empujamos el texto más al borde y achicamos la fuente para que quepan los 10 segmentos
       const radioTexto = 300; 
       const tx = centro + radioTexto * Math.cos(medioRad);
       const ty = centro + radioTexto * Math.sin(medioRad);
@@ -120,8 +117,23 @@ document.addEventListener("DOMContentLoaded", function() {
   generarRuedaSVG();
   const ruedaAnimable = document.getElementById("rueda-svg");
 
-  setTimeout(() => { popup.classList.add("visible"); }, 1000); 
-  btnCerrar.addEventListener("click", () => { popup.classList.remove("visible"); });
+  // ==========================================
+  // NUEVA LÓGICA DE APARICIÓN INTELIGENTE
+  // ==========================================
+  const yaJugo = localStorage.getItem("samcor_ruleta_completada");
+  const yaCerro = sessionStorage.getItem("samcor_ruleta_cerrada");
+
+  // Si no ha jugado nunca en este dispositivo Y no la ha cerrado en esta sesión, se muestra.
+  if (!yaJugo && !yaCerro) {
+    setTimeout(() => { popup.classList.add("visible"); }, 2500); 
+  }
+
+  btnCerrar.addEventListener("click", () => { 
+    popup.classList.remove("visible"); 
+    // Guardamos en sesión que la cerró, para no molestar más mientras navega
+    sessionStorage.setItem("samcor_ruleta_cerrada", "true");
+  });
+  // ==========================================
 
   btnGirar.addEventListener("click", () => {
     const rut = inputRut.value.trim();
@@ -142,15 +154,11 @@ document.addEventListener("DOMContentLoaded", function() {
     bloqueFormulario.classList.add("oculto");
     ruedaContenedor.classList.add("modo-giro");
 
-    // --- ALGORITMO DE PROBABILIDAD (TRUCAJE) ---
-    // 1. Sumar todos los pesos (Total = 50)
     let pesoTotal = catalogoPremios.reduce((acc, p) => acc + p.peso, 0);
-    // 2. Elegir un número aleatorio entre 0 y 50
     let randomP = Math.random() * pesoTotal;
     let sumaPesos = 0;
     let indiceGanador = 0;
 
-    // 3. Determinar qué premio ganó según el peso
     for (let i = 0; i < catalogoPremios.length; i++) {
       sumaPesos += catalogoPremios[i].peso;
       if (randomP <= sumaPesos) {
@@ -159,14 +167,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 
-    // 4. Calcular los grados de rotación para forzar la rueda a detenerse en el indiceGanador
     const anguloPorSegmento = 360 / catalogoPremios.length;
-    // Rotación base para que el segmento ganador quede exactamente apuntando al centro arriba (0 grados)
     const rotacionBase = 360 - (indiceGanador * anguloPorSegmento);
-    // Añadimos un pequeño desvío aleatorio para que no caiga siempre exactamente en el centro matemático del premio
     const desvioAleatorio = (Math.random() * (anguloPorSegmento - 6)) - ((anguloPorSegmento - 6) / 2);
-    
-    // Damos 8 vueltas completas de espectáculo (2880 grados) + la rotación calculada
     const rotacionTotal = 2880 + rotacionBase + desvioAleatorio; 
 
     ruedaAnimable.style.transform = `rotate(${rotacionTotal}deg)`;
@@ -182,8 +185,9 @@ document.addEventListener("DOMContentLoaded", function() {
       mensajePremio.classList.remove("mensaje-oculto");
       mensajePremio.classList.add("mensaje-visible");
       
-      // Activar el bloqueo en producción para evitar que tiren más de una vez
-      localStorage.setItem(claveStorage, "true"); 
+      // BLOQUEOS DE PRODUCCIÓN ACTIVADOS
+      localStorage.setItem(claveStorage, "true"); // Bloquea el RUT específico
+      localStorage.setItem("samcor_ruleta_completada", "true"); // Bloquea el pop-up completo en el dispositivo
 
       // --- ENVÍO DE DATOS A GOOGLE SHEETS ---
       // REEMPLAZA ESTA URL POR LA QUE TE DIO GOOGLE APPS SCRIPT
@@ -195,10 +199,9 @@ document.addEventListener("DOMContentLoaded", function() {
         correo: correo,
         premio_texto: textoCompleto,
         premio_codigo: premioGanado.valor,
-        fecha: new Date().toLocaleString("es-CL") // Guarda la hora local de Chile
+        fecha: new Date().toLocaleString("es-CL") 
       };
 
-      // Usamos Content-Type text/plain para evitar bloqueos de seguridad (CORS) del navegador
       fetch(webhookURL, {
         method: "POST",
         headers: {
