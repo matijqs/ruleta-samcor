@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
       mensajePremio.classList.add("mensaje-visible");
       
       // Activar el bloqueo en producción para evitar que tiren más de una vez
-      // localStorage.setItem(claveStorage, "true"); 
+      localStorage.setItem(claveStorage, "true"); 
 
       // --- ENVÍO DE DATOS A GOOGLE SHEETS ---
       // REEMPLAZA ESTA URL POR LA QUE TE DIO GOOGLE APPS SCRIPT
