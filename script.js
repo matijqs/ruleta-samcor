@@ -14,17 +14,20 @@ document.addEventListener("DOMContentLoaded", function() {
   const bloqueFormulario = document.getElementById("bloque-formulario");
   const ruedaContenedor = document.querySelector(".rueda-contenedor");
 
+// --- NUEVO CATÁLOGO DE PREMIOS Y PROBABILIDADES ---
+  // El atributo "peso" define la probabilidad. La suma total es 100 (1 peso = 1%).
+  // Las casillas con peso 0 son señuelos visuales: se ven en la rueda pero es imposible caer en ellas.
   const catalogoPremios = [
-    { linea1: "5% Dcto", linea2: "Toda la tienda", color: "#FF1493", valor: "dcto_5", peso: 10 },
-    { linea1: "Sigue", linea2: "Intentando", color: "#2a2a2a", valor: "perder", peso: 1 },
-    { linea1: "10% Dcto", linea2: "Toda la tienda", color: "#FF4500", valor: "dcto_10", peso: 4 },
-    { linea1: "Kit Renovador", linea2: "+ Silicona", color: "#32CD32", valor: "kit_silicona", peso: 10 },
-    { linea1: "15% Dcto", linea2: "Toda la tienda", color: "#FFD700", valor: "dcto_15", peso: 1 },
-    { linea1: "Set Tuercas", linea2: "Seguridad", color: "#00BFFF", valor: "set_tuercas", peso: 10 },
-    { linea1: "Casi...", linea2: "Sigue así", color: "#333333", valor: "perder", peso: 2 },
-    { linea1: "25% Dcto", linea2: "Toda la tienda", color: "#8A2BE2", valor: "dcto_25", peso: 1 },
-    { linea1: "Kit Renovador", linea2: "+ Visera", color: "#FF8C00", valor: "kit_visera", peso: 10 },
-    { linea1: "Sin", linea2: "Premio", color: "#111111", valor: "perder", peso: 1 }
+    { linea1: "5% Dcto", linea2: "Toda la tienda", color: "#FF1493", valor: "dcto_5", peso: 30 },
+    { linea1: "Sigue", linea2: "Intentando", color: "#2a2a2a", valor: "perder", peso: 0 },
+    { linea1: "10% Dcto", linea2: "Toda la tienda", color: "#FF4500", valor: "dcto_10", peso: 15 },
+    { linea1: "Kit Renovador", linea2: "+ Silicona", color: "#32CD32", valor: "kit_silicona", peso: 17 },
+    { linea1: "15% Dcto", linea2: "Toda la tienda", color: "#FFD700", valor: "dcto_15", peso: 3 },
+    { linea1: "Set Tuercas", linea2: "Seguridad", color: "#00BFFF", valor: "set_tuercas", peso: 17 },
+    { linea1: "Casi...", linea2: "Sigue así", color: "#333333", valor: "perder", peso: 0 },
+    { linea1: "20% Dcto", linea2: "Toda la tienda", color: "#8A2BE2", valor: "dcto_20", peso: 1 },
+    { linea1: "Kit Renovador", linea2: "+ Visera", color: "#FF8C00", valor: "kit_visera", peso: 17 },
+    { linea1: "Sin", linea2: "Premio", color: "#111111", valor: "perder", peso: 0 }
   ];
 
   function validarRUT(rut) {
