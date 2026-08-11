@@ -25,17 +25,13 @@
    * flecha se detiene en esa posición.
    */
   var CATALOGO = [
-    { linea1: '5% Dcto',       linea2: 'Toda la tienda', color: '#FF1493' },
-    { linea1: 'Sigue',         linea2: 'Intentando',     color: '#2a2a2a' },
-    { linea1: '10% Dcto',      linea2: 'Toda la tienda', color: '#FF4500' },
-    { linea1: 'Kit Renovador', linea2: '+ Silicona',     color: '#32CD32' },
-    { linea1: '15% Dcto',      linea2: 'Toda la tienda', color: '#FFD700' },
-    { linea1: 'Set Tuercas',   linea2: 'Seguridad',      color: '#00BFFF' },
-    { linea1: 'Casi...',       linea2: 'Sigue así',      color: '#333333' },
-    { linea1: '20% Dcto',      linea2: 'Toda la tienda', color: '#8A2BE2' },
-    { linea1: 'Kit Renovador', linea2: '+ Visera',       color: '#FF8C00' },
-    { linea1: 'Sin',           linea2: 'Premio',         color: '#111111' }
-  ];
+  { linea1: '5% Dcto',  linea2: 'Toda la tienda', color: '#FF1493' },
+  { linea1: 'Sigue',    linea2: 'Intentando',     color: '#2a2a2a' },
+  { linea1: '10% Dcto', linea2: 'Toda la tienda', color: '#FF4500' },
+  { linea1: 'Casi...',  linea2: 'Sigue así',      color: '#333333' },
+  { linea1: '15% Dcto', linea2: 'Toda la tienda', color: '#FFD700' },
+  { linea1: 'Sin',      linea2: 'Premio',         color: '#111111' }
+];
 
   // -------------------------------------------------------
   // ARRANQUE
