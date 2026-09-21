@@ -24,15 +24,14 @@
    * al CATALOGO del Code.gs: el servidor devuelve un índice y la
    * flecha se detiene en esa posición.
    */
-  var CATALOGO = [
-  { linea1: '5% Dcto',  linea2: 'Toda la tienda', color: '#FF1493' },
-  { linea1: 'Sigue',    linea2: 'Intentando',     color: '#2a2a2a' },
-  { linea1: '10% Dcto', linea2: 'Toda la tienda', color: '#FF4500' },
-  { linea1: 'Casi...',  linea2: 'Sigue así',      color: '#333333' },
-  { linea1: '15% Dcto', linea2: 'Toda la tienda', color: '#FFD700' },
-  { linea1: 'Sin',      linea2: 'Premio',         color: '#111111' }
-];
-
+var CATALOGO = [
+    { linea1: '5% Dcto',  linea2: 'Toda la tienda', color: '#FF1493' },
+    { linea1: 'Sigue',    linea2: 'Intentando',     color: '#2a2a2a' },
+    { linea1: '10% Dcto', linea2: 'Toda la tienda', color: '#FF4500' },
+    { linea1: 'Casi...',  linea2: 'Sigue así',      color: '#333333' },
+    { linea1: '15% Dcto', linea2: 'en neumáticos',  color: '#FFD700' },
+    { linea1: 'Sin',      linea2: 'Premio',         color: '#111111' }
+  ];
   // -------------------------------------------------------
   // ARRANQUE
   // -------------------------------------------------------
